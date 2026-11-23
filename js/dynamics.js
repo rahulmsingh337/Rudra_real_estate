@@ -25,7 +25,7 @@ if(rw){
       .add(()=>{wi=(wi+1)%words.length;rw.textContent=words[wi]})
       .fromTo(rw,{yPercent:105},{yPercent:0,duration:.7,ease:'power3.out'});
   };
-  gsap.delayedCall(3.4,swap);
+  gsap.delayedCall(4.2,swap);
 }
 /* statement lights up word by word with scroll */
 if(qa('.sw').length){
