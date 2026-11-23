@@ -7,29 +7,23 @@ const sp=document.createElement('div');sp.id='sp';document.body.appendChild(sp);
 const spx=gsap.quickSetter(sp,'scaleX');
 /* header hide/show */
 const hdr=q('#hdr');let last=0;
-/* velocity skew + marquee */
-const skewEls=qa('.mods,.stats'),sk=skewEls.map(e=>gsap.quickSetter(e,'skewY','deg'));
+/* marquee */
 const mt=gsap.to('.mt',{xPercent:-50,repeat:-1,duration:28,ease:'none'});
-let sv=0;
 ScrollTrigger.create({onUpdate:s=>{
   spx(s.progress);
-  const y=scrollY;if(y>240&&y>last+4)hdr.classList.add('hide');else if(y<last-4||y<240)hdr.classList.remove('hide');last=y;
-  const v=gsap.utils.clamp(-2.2,2.2,s.getVelocity()/-400);
-  if(Math.abs(v)>Math.abs(sv))sv=v;
+  const y=scrollY;if(y>240&&y>last+4&&!hdr.matches(':focus-within'))hdr.classList.add('hide');else if(y<last-4||y<240)hdr.classList.remove('hide');last=y;
   mt.timeScale(1+Math.abs(s.getVelocity())/350*(s.direction>0?1:-1));
 }});
-gsap.ticker.add(()=>{sv*=.9;sk.forEach(f=>f(sv));if(Math.abs(sv)<.01)sv=0;mt.timeScale(gsap.utils.interpolate(mt.timeScale(),mt.timeScale()>0?1:-1,.06))});
+gsap.ticker.add(()=>{mt.timeScale(gsap.utils.interpolate(mt.timeScale(),mt.timeScale()>0?1:-1,.06))});
 /* hero scroll parallax */
 gsap.to('#heroCv',{yPercent:14,scale:1.08,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
 gsap.to('.hero .wrap',{y:-70,opacity:.15,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom 20%',scrub:true}});
 ['#storyCv','#insideCv'].forEach(id=>gsap.fromTo(id,{scale:1.1},{scale:1,ease:'none',scrollTrigger:{trigger:id.replace('Cv',''),start:'top bottom',end:'top top',scrub:true}}));
 /* word reveals */
 qa('.modules h2,.value h2,.final h2').forEach(h=>{
-  h.innerHTML=h.textContent.trim().split(/\s+/).map(w=>'<span class="w"><span>'+w+'</span></span>').join(' ');
+  const txt=h.textContent.trim();h.setAttribute('aria-label',txt);h.innerHTML=txt.split(/\s+/).map(w=>'<span class="w" aria-hidden="true"><span>'+w+'</span></span>').join(' ');
   gsap.from(h.querySelectorAll('.w>span'),{yPercent:115,duration:.9,ease:'power3.out',stagger:.05,scrollTrigger:{trigger:h,start:'top 85%'}});
 });
-/* section curtain */
-['.modules','.value','.final'].forEach(s=>gsap.fromTo(s,{clipPath:'inset(6% 4% 0% 4% round 32px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:s,start:'top 100%',end:'top 55%',scrub:true}}));
 /* count-up */
 qa('.stats b').forEach(b=>{
   const m=b.textContent.match(/(\d+)(.*)/);if(!m)return;const o={n:0},end=+m[1];
@@ -56,7 +50,7 @@ document.addEventListener('mouseleave',()=>gsap.to([dot,ring],{opacity:0,duratio
 document.addEventListener('mouseenter',()=>shown&&gsap.to([dot,ring],{opacity:1,duration:.2}));
 document.addEventListener('mouseover',e=>{const t=e.target.closest('a,button,.mod');ring.classList.toggle('act',!!t);const c=e.target.closest('canvas');ring.classList.toggle('drag',!!c&&!t)});
 /* magnetic buttons */
-qa('.btn,.logo').forEach(b=>{
+qa('.btn').forEach(b=>{
   const x=gsap.quickTo(b,'x',{duration:.5,ease:'elastic.out(1,.6)'}),y=gsap.quickTo(b,'y',{duration:.5,ease:'elastic.out(1,.6)'});
   b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();x((e.clientX-r.left-r.width/2)*.28);y((e.clientY-r.top-r.height/2)*.4)});
   b.addEventListener('mouseleave',()=>{x(0);y(0)});
