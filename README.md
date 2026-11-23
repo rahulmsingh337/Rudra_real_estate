@@ -105,11 +105,17 @@ CLI: `npx vercel --prod`.
 | Surface | `#0f1b2d` |
 | Accent | `#facc15`, hover `#f59e0b` |
 | Muted text | `#a3abb8` |
-| Type | Inter, 400 to 800 |
+| Type | Instrument Serif for headlines (regular and italic), Inter 400 to 800 for body and UI. Both self-hosted. |
 | Radius | 16px for controls and cards, pills for tags |
 | Contact green | `#22c55e` (WhatsApp only) |
 
 Yellow is reserved for the main actions and highlights.
+
+## Dynamic text
+
+- The hero headline rotates its key word (property, home, plot, office, investment, rental) with a slide-up mask. Screen readers get the static line "Find the right property in Noida."
+- The statement under the problem section lights up word by word as you scroll.
+- Stats count up, section headings reveal word by word, and a light sweep crosses "Noida."
 
 ## Accessibility and motion
 

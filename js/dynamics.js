@@ -15,6 +15,23 @@ ScrollTrigger.create({onUpdate:s=>{
   mt.timeScale(1+Math.abs(s.getVelocity())/350*(s.direction>0?1:-1));
 }});
 gsap.ticker.add(()=>{mt.timeScale(gsap.utils.interpolate(mt.timeScale(),mt.timeScale()>0?1:-1,.06))});
+/* rotating hero word */
+const rw=q('.rw');
+if(rw){
+  const words=['property','home','plot','office','investment','rental'];let wi=0;
+  const swap=()=>{
+    gsap.timeline({onComplete:()=>gsap.delayedCall(2.2,swap)})
+      .to(rw,{yPercent:-105,duration:.55,ease:'power3.in'})
+      .add(()=>{wi=(wi+1)%words.length;rw.textContent=words[wi]})
+      .fromTo(rw,{yPercent:105},{yPercent:0,duration:.7,ease:'power3.out'});
+  };
+  gsap.delayedCall(3.4,swap);
+}
+/* statement lights up word by word with scroll */
+if(qa('.sw').length){
+  gsap.set('.sw',{opacity:.16});
+  gsap.to('.sw',{opacity:1,stagger:.3,duration:1,ease:'none',scrollTrigger:{trigger:'.bright',start:'top 82%',end:'bottom 48%',scrub:true}});
+}
 /* hero scroll parallax */
 gsap.to('#heroCv',{yPercent:14,scale:1.08,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
 gsap.to('.hero .wrap',{y:-70,opacity:.15,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom 20%',scrub:true}});
