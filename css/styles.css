@@ -161,7 +161,7 @@ header.hide{transform:translateY(-110%)}
 .marq{overflow:hidden;border-block:1px solid var(--border);background:var(--bg-deep);padding:22px 0;white-space:nowrap}
 .mt{display:inline-flex;gap:56px;padding-right:56px;font-weight:800;letter-spacing:-.035em;font-size:clamp(28px,4.4vw,60px);color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.55)}
 .mt span:nth-child(even){color:var(--accent);-webkit-text-stroke:0}
-.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-right:.22em}.w>span{display:inline-block}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}.w>span{display:inline-block}
 .hero .glow{position:absolute;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(250,204,21,.22),transparent 65%);pointer-events:none;z-index:1;opacity:0;transition:opacity .4s}
 .hero:hover .glow{opacity:1}
 .mod::after,.stats::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(250,204,21,.18),transparent 60%)}
@@ -173,3 +173,23 @@ header.hide{transform:translateY(-110%)}
 .cur-r{width:40px;height:40px;margin:-20px 0 0 -20px;border:1.5px solid rgba(250,204,21,.7);transition:width .3s,height .3s,margin .3s,background .3s,border-color .3s}
 .cur-r.act{width:76px;height:76px;margin:-38px 0 0 -38px;background:rgba(250,204,21,.14)}
 .cur-r.drag{width:64px;height:64px;margin:-32px 0 0 -32px;border-color:#fff}
+
+/* premium motion accents */
+.shine{background:linear-gradient(100deg,#fff 40%,#facc15 50%,#fff 60%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shn 5.5s ease-in-out 1.8s infinite}
+@keyframes shn{0%{background-position:120% 0}55%,100%{background-position:-120% 0}}
+.pts{position:absolute;inset:0;pointer-events:none;z-index:1}
+.pt{position:absolute;left:var(--x);top:var(--y);width:3px;height:3px;border-radius:50%;background:#facc15;box-shadow:0 0 10px 2px rgba(250,204,21,.5);opacity:0;animation:ptf 6s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes ptf{0%,100%{transform:translateY(0);opacity:0}50%{transform:translateY(-32px);opacity:.85}}
+.rule{height:24px;background:var(--bg) url(../assets/images/divider.svg) center/100% 100% no-repeat}
+.final::before,.final::after{display:none}
+.final .sk{position:absolute;left:0;right:0;bottom:0;width:100%;height:min(34vw,300px);pointer-events:none;z-index:0}
+.sk .bd{transform-box:fill-box;transform-origin:50% 100%}
+.js .sk .bd{transform:scaleY(0)}
+.final.in .sk .bd{animation:skr 1.8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*.09s)}
+@keyframes skr{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.sk .w{animation:wf 4.5s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes wf{from{opacity:.2}to{opacity:.95}}
+@media(max-width:767px){.pt:nth-child(n+5){display:none}}
+
+.final{padding-bottom:calc(min(34vw,300px) + 40px)}
+@media(max-width:767px){.final{padding-bottom:calc(min(34vw,300px) + 24px)}}

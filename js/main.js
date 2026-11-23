@@ -84,6 +84,11 @@ function start(){
 }
 setTimeout(start,2000);
 
+/* closing skyline rises when it scrolls into view */
+const fin=document.getElementById('cta');
+if(reduce||!('IntersectionObserver' in window))fin.classList.add('in');
+else new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){fin.classList.add('in');o.disconnect()}},{threshold:.25}).observe(fin);
+
 /* header + menu */
 const hdr=document.getElementById('hdr'),menu=document.getElementById('menu'),panel=document.getElementById('panel');
 const inertEls=[document.getElementById('main'),document.querySelector('footer')];
