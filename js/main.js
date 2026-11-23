@@ -9,7 +9,7 @@ const N={frames:mobile?33:66,bridges:mobile?27:54};
 const url=(n,i)=>'assets/sequence/'+(mobile?'mobile/':'')+n+'/'+n+'-'+String(i+1).padStart(3,'0')+'.webp';
 const mk=n=>Array.from({length:N[n]},()=>new Image());
 const F=mk('frames'),B=mk('bridges');
-const WIN={frames:[.1,1],bridges:[0,1]};   /* first visible frame .. last: skips the empty opening */
+const WIN={frames:[0,1],bridges:[0,1]};   /* full range, linear with scroll */   /* first visible frame .. last: skips the empty opening */
 
 /* canvas */
 function setup(c){
@@ -99,7 +99,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&panel.classList.contains('op
 
 /* scroll story: eased playhead, frames remapped past the empty opening */
 const T={story:{t:0,c:0},inside:{t:0,c:0}};
-const remap=(p,a,b)=>{const s=.06;return p<s?a*(p/s):p>1-s?b+(1-b)*((p-(1-s))/s):a+(b-a)*((p-s)/(1-2*s))};
+const remap=(p,a,b)=>{if(a===0&&b===1)return p;const s=.06;return p<s?a*(p/s):p>1-s?b+(1-b)*((p-(1-s))/s):a+(b-a)*((p-s)/(1-2*s))};
 function bind(id,bar){
   const el=document.getElementById(id),caps=[...el.querySelectorAll('.cap-i')],b=document.getElementById(bar);
   ScrollTrigger.create({trigger:el,start:'top top',end:'bottom bottom',onUpdate:s=>{
