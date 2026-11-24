@@ -72,7 +72,12 @@ index.html
 css/styles.css          design tokens, layout, components
 js/main.js              frame sequences, loading, header, menu, scroll story
 js/dynamics.js          cursor, hero parallax, magnetic buttons, marquee, count-up
+js/config.js            client-editable content: RERA number, stats, photos
+js/site.js              renders that content
+js/enquiry.js           lead form behaviour
 js/vendor/              GSAP 3.12.5 and ScrollTrigger (self-hosted)
+api/lead.js             lead form endpoint (Vercel function)
+scripts/                photo optimiser
 assets/fonts/           Inter variable, latin subset
 assets/images/          logo
 assets/sequence/        frames/ and bridges/ (desktop), mobile/ (phones)
@@ -125,15 +130,35 @@ Yellow is reserved for the main actions and highlights.
 - Animated headings keep a proper label for screen readers.
 - Touch devices get no cursor, tilt or magnetic effects.
 
+## Client content (no code changes needed)
+
+Edit **`js/config.js`**:
+
+| Setting | What it does |
+| --- | --- |
+| `rera` | RERA registration number. Empty hides it; filled, it shows under the stats and in the footer. |
+| `stats` | `null` keeps the current figures. Provide verified figures to replace them. |
+| `photos` | Project photos. With 3 or more, a "Projects" gallery appears automatically. Prepare files with `python3 scripts/optimize-photos.py path/to/originals`. See `assets/photos/README.md`. |
+
+## Lead form
+
+The enquiry form posts to `api/lead.js` (a Vercel function). Set these in **Vercel > Settings > Environment Variables**, then redeploy:
+
+| Variable | Purpose |
+| --- | --- |
+| `RESEND_API_KEY` and `LEAD_TO_EMAIL` | Emails each lead through [Resend](https://resend.com). `LEAD_TO_EMAIL` can hold several addresses, comma-separated. |
+| `LEAD_FROM` | Optional sender, for example `Rudra Leads <leads@yourdomain.com>`. Needs a verified domain in Resend. |
+| `LEAD_WEBHOOK_URL` | Optional. Also posts each lead as JSON (Google Sheets script, Zapier, etc.). |
+
+If nothing is configured, or sending fails, the visitor gets a "Continue on WhatsApp" link with their details pre-filled, so no lead is lost. The form has a hidden spam field, checks the request origin and validates input on the server. It does not rate-limit; add that (for example with Vercel Firewall) if spam appears.
+
 ## Before launch
 
-These need information from the client:
-
-- [ ] Verify the stats (10+ years, 500+ deals, 98% satisfaction, 50+ agents) and show the RERA registration number
-- [ ] Add real project photos or listings in place of the abstract building
+- [ ] Fill in `js/config.js`: verified stats, RERA number, project photos
+- [ ] Set the lead form environment variables and send a test enquiry
 - [ ] Use a professional email address instead of a personal one
 - [ ] Add the production domain, canonical URL and an `og:image` with an absolute URL
-- [ ] Add a lead form, Privacy and Terms pages, and analytics
+- [ ] Add Privacy and Terms pages and analytics
 - [ ] Add `sitemap.xml`, `robots.txt` and redirects for the old `/about` and `/services` URLs
 
 <p align="center"><img src="assets/readme/divider.svg" alt="" width="100%"></p>

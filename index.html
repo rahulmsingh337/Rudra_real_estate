@@ -19,7 +19,7 @@
 <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add("js")</script>
-<link rel="stylesheet" href="css/styles.css?v=8">
+<link rel="stylesheet" href="css/styles.css?v=9">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -34,7 +34,7 @@
 <nav id="panel" aria-label="Main">
   <a href="#story">How we work</a>
   <a href="#platform">Services</a>
-  <a href="#value">Why Rudra</a>
+  <a href="#value">Why choose us</a>
   <a href="#cta">Contact</a>
 </nav>
 
@@ -57,7 +57,7 @@
 <section class="problem" id="problem">
   <div class="wrap">
     <p class="dim"><span class="ln"><span>Hidden costs.</span></span><span class="ln"><span>Unclear paperwork.</span></span><span class="ln"><span>Brokers who vanish after the deal.</span></span></p>
-    <p class="bright lit"><span class="sw">Rudra</span> <span class="sw">keeps</span> <span class="sw">every</span> <span class="sw">cost</span> <span class="sw">and</span> <span class="sw">document</span> <span class="sw acc">in</span> <span class="sw acc">the</span> <span class="sw acc">open.</span></p>
+    <p class="bright lit"><span class="sw">We</span> <span class="sw">keep</span> <span class="sw">every</span> <span class="sw">cost</span> <span class="sw">and</span> <span class="sw">document</span> <span class="sw acc">in</span> <span class="sw acc">the</span> <span class="sw acc">open.</span></p>
   </div>
 </section>
 
@@ -109,6 +109,19 @@
       <a class="btn pri" href="tel:+919574416374">Call Now</a>
       <a class="btn" href="https://wa.me/919574416374?text=Hi%2C%20I%27m%20interested%20in%20your%20real%20estate%20services%20in%20Noida."><i class="dot"></i>WhatsApp Us</a>
     </div>
+    <form class="enq" id="enq" novalidate>
+      <h3>Request a free consultation</h3>
+      <div class="row">
+        <label>Your name<input name="name" autocomplete="name" required maxlength="80"></label>
+        <label>Mobile number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="18" placeholder="10-digit mobile number"></label>
+      </div>
+      <label>I want to<select name="intent"><option>Buy a property</option><option>Sell a property</option><option>Rent a property</option><option>Invest in property</option><option>Something else</option></select></label>
+      <label>Message (optional)<textarea name="message" rows="3" maxlength="500"></textarea></label>
+      <input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn pri" type="submit">Request a call back</button>
+      <p class="fine">By submitting, you agree that Rudra Real Estate may contact you about your enquiry.</p>
+      <p class="status" role="status" aria-live="polite"></p>
+    </form>
     <div class="contact">
       <div><h4>Visit</h4><p>Rudra Real Estate Commercial - 01, First Floor, Shop No. 19, Paras Tierea, Sector 137, Noida</p></div>
       <div><h4>Call</h4><p><a href="tel:+919574416374">+91-9574416374</a><br><a href="tel:+919638285843">+91-9638285843</a></p></div>
@@ -122,7 +135,7 @@
   <div class="wrap">
     <div class="fgrid">
       <div><a class="logo" href="#top" aria-label="Rudra Real Estate home"><img class="lg" src="assets/images/logo.webp" alt="Rudra Real Estate" width="118" height="54"></a><p style="color:var(--muted);margin-top:14px;max-width:32ch;font-size:16px">Your trusted real estate partner in Noida and Delhi NCR. Buy, sell, rent and invest with complete transparency.</p></div>
-      <div><h4>Quick links</h4><ul><li><a href="#story">How we work</a></li><li><a href="#platform">Services</a></li><li><a href="#value">Why Consult us</a></li><li><a href="#cta">Contact</a></li></ul></div>
+      <div><h4>Quick links</h4><ul><li><a href="#story">How we work</a></li><li><a href="#platform">Services</a></li><li><a href="#value">Why choose us</a></li><li><a href="#cta">Contact</a></li></ul></div>
       <div><h4>Services</h4><ul><li><a href="#platform">Property buying</a></li><li><a href="#platform">Property selling</a></li><li><a href="#platform">Rental services</a></li><li><a href="#platform">Investment consulting</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="tel:+919574416374">+91-9574416374</a></li><li><a href="tel:+919638285843">+91-9638285843</a></li><li><a href="mailto:ravipandit12523@gmail.com">Email us</a></li><li><a href="https://wa.me/919574416374?text=Hi%2C%20I%27m%20interested%20in%20your%20real%20estate%20services%20in%20Noida.">Chat on WhatsApp</a></li></ul></div>
     </div>
@@ -132,7 +145,10 @@
 
 <script src="js/vendor/gsap.min.js" defer></script>
 <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-<script src="js/main.js?v=8" defer></script>
-<script src="js/dynamics.js?v=8" defer></script>
+<script src="js/config.js?v=9" defer></script>
+<script src="js/site.js?v=9" defer></script>
+<script src="js/main.js?v=9" defer></script>
+<script src="js/enquiry.js?v=9" defer></script>
+<script src="js/dynamics.js?v=9" defer></script>
 </body>
 </html>
